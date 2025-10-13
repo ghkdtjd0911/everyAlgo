@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>データ構造図</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Inter 폰트 import */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        /* 기본 노드 스타일 */
+        .node {
+            border: 1px solid #9ca3af;
+            padding: 0.5rem 1rem;
+            border-radius: 0.375rem;
+            background-color: white;
+            text-align: center;
+            white-space: nowrap;
+        }
+
+        /* 하이라이트된 노드 스타일 */
+        .node-highlight {
+            background-color: #fee2e2; /* red-100 */
+            border-color: #f87171; /* red-400 */
+        }
+
+        /* 트리 구조를 위한 flex 컨테이너 */
+        .tree {
+            display: flex;
+            align-items: center;
+        }
+
+        .tree-branch {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+        }
+
+        .tree-sub-branch {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .tree-group {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* 연결선 스타일 */
+        .connector {
+            position: relative;
+            width: 3rem;
+            height: 1px;
+            background-color: #9ca3af;
+        }
+
+        .connector-branch-start {
+            position: relative;
+            width: 3rem;
+        }
+        /* 가지가 시작되는 부분의 세로선 */
+        .connector-branch-start::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            height: 1px;
+            width: 100%;
+            background-color: #9ca3af;
+        }
+        /* 세로선을 그리기 위한 가상 요소 */
+        .branch-line {
+            position: relative;
+            padding-left: 3rem;
+        }
+        .branch-line::before {
+            content: '';
+            position: absolute;
+            left: 1.5rem;
+            top: -1rem; /* gap/2 */
+            bottom: -1rem; /* gap/2 */
+            width: 1px;
+            background-color: #9ca3af;
+            z-index: -1;
+        }
+       .branch-line:first-child::before {
+            top: 50%;
+        }
+        .branch-line:last-child::before {
+            bottom: 50%;
+        }
+        .branch-line:only-child::before {
+           display: none;
+        }
+        
+        /* 각 노드와 그룹을 연결하는 가로선 */
+        .group-connector {
+            position: relative;
+            width: 1.5rem;
+            height: 1px;
+            background-color: #9ca3af;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="tree">
+        <!-- Root Node -->
+        <div class="node">データ構造</div>
+        <div class="connector-branch-start"></div>
+
+        <!-- Level 1 Branches -->
+        <div class="tree-branch branch-line-container">
+            <!-- 단순 구조 -->
+            <div class="tree-group branch-line">
+                <div class="group-connector"></div>
+                <div class="node">単純な構造</div>
+                <div class="connector-branch-start"></div>
+                <div class="tree-branch">
+                    <div class="tree-group branch-line"><div class="group-connector"></div><div class="node">整数</div></div>
+                    <div class="tree-group branch-line"><div class="group-connector"></div><div class="node">実数</div></div>
+                    <div class="tree-group branch-line"><div class="group-connector"></div><div class="node">文字</div></div>
+                    <div class="tree-group branch-line"><div class="group-connector"></div><div class="node">文字列</div></div>
+                </div>
+            </div>
+
+            <!-- 선형 구조 -->
+            <div class="tree-group branch-line">
+                <div class="group-connector"></div>
+                <div class="node node-highlight">線形構造</div>
+                <div class="connector-branch-start"></div>
+                <div class="tree-branch">
+                    <div class="tree-group branch-line">
+                        <div class="group-connector"></div><div class="node">シーケンシャルリスト</div>
+                        <div class="connector"></div>
+                        <div class="node">単純連結リスト</div>
+                    </div>
+                    <div class="tree-group branch-line">
+                        <div class="group-connector"></div><div class="node">連結リスト</div>
+                         <div class="connector-branch-start"></div>
+                         <div class="tree-branch">
+                             <div class="tree-group branch-line"><div class="group-connector"></div><div class="node">二重連結リスト</div></div>
+                             <div class="tree-group branch-line"><div class="group-connector"></div><div class="node">循環連結リスト</div></div>
+                         </div>
+                    </div>
+                    <div class="tree-group branch-line"><div class="group-connector"></div><div class="node node-highlight">スタック</div></div>
+                    <div class="tree-group branch-line">
+                        <div class="group-connector"></div><div class="node node-highlight">キュー</div>
+                        <div class="connector-branch-start"></div>
+                        <div class="tree-branch">
+                             <div class="tree-group branch-line"><div class="group-connector"></div><div class="node">一般キュー</div></div>
+                             <div class="tree-group branch-line"><div class="group-connector"></div><div class="node">優先度付きキュー</div></div>
+                         </div>
+                    </div>
+                    <div class="tree-group branch-line"><div class="group-connector"></div><div class="node node-highlight">デック</div></div>
+                </div>
+            </div>
+
+            <!-- 비선형 구조 -->
+            <div class="tree-group branch-line">
+                <div class="group-connector"></div>
+                <div class="node">非線形構造</div>
+                <div class="connector-branch-start"></div>
+                <div class="tree-branch">
+                    <div class="tree-group branch-line">
+                        <div class="group-connector"></div><div class="node">ツリー</div>
+                        <div class="connector-branch-start"></div>
+                        <div class="tree-branch">
+                             <div class="tree-group branch-line"><div class="group-connector"></div><div class="node">一般ツリー</div></div>
+                             <div class="tree-group branch-line"><div class="group-connector"></div><div class="node">二分木</div></div>
+                         </div>
+                    </div>
+                    <div class="tree-group branch-line">
+                        <div class="group-connector"></div><div class="node">グラフ</div>
+                        <div class="connector-branch-start"></div>
+                        <div class="tree-branch">
+                             <div class="tree-group branch-line"><div class="group-connector"></div><div class="node">有向グラフ</div></div>
+                             <div class="tree-group branch-line"><div class="group-connector"></div><div class="node">無向グラフ</div></div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 파일 구조 -->
+            <div class="tree-group branch-line">
+                <div class="group-connector"></div>
+                <div class="node">ファイル構造</div>
+                <div class="connector-branch-start"></div>
+                <div class="tree-branch">
+                    <div class="tree-group branch-line"><div class="group-connector"></div><div class="node">順次ファイル</div></div>
+                    <div class="tree-group branch-line"><div class="group-connector"></div><div class="node">索引ファイル</div></div>
+                    <div class="tree-group branch-line"><div class="group-connector"></div><div class="node">直接ファイル</div></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>
